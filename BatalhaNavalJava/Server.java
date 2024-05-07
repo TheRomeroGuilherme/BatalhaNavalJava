@@ -1,19 +1,10 @@
+
+//Fim Arquivo Server
 import java.io.*;
 import java.net.*;
 
 public class Server {
-
-    private static Embarcacao embarcacao; // Variável para as embarcações
-    private static Mapa mapa; // Variável para o mapa
-
     public static void main(String[] args) {
-        mapa = new Mapa(); // Criando um mapa de 10x10, por exemplo
-        embarcacao = new Embarcacao(); // Criando as embarcações
-
-        // Exibir o mapa
-        mapa.displayMap();
-        // Exibir os barcos
-        displayBarcos();
 
         try (ServerSocket serverSocket = new ServerSocket(12345)) { // Cria um servidor na porta 12345
             System.out.println("Servidor aguardando Jogadores darem pronto...");
@@ -42,6 +33,9 @@ public class Server {
             // Lógica para comunicação entre os clientes
             String inputCliente1, inputCliente2;
             while (true) {
+                // tem que fazer a mediação entre os clientes ou seja aqui tem que ocorrer a
+                // logíca de cada jogada
+
                 // Recebe mensagem do Cliente1 e envia para o Cliente2
                 inputCliente1 = inCliente1.readLine();
                 if (inputCliente1 != null) {
@@ -63,12 +57,5 @@ public class Server {
         }
     }
 
-    private static void displayBarcos() {
-        System.out.println("Barcos");
-        System.out.println("Porta-Aviões: \t" + String.join("", embarcacao.getPortaAvioes()));
-        System.out.println("Destroyers: \t" + String.join("", embarcacao.getDestroyers()));
-        System.out.println("Submarinos: \t" + String.join("", embarcacao.getSubmarinos()));
-        System.out.println("Fragatas: \t" + String.join("", embarcacao.getFragatas()));
-        System.out.println("Botes: \t\t" + String.join("", embarcacao.getBotes()));
-    }
 }
+// Fim Arquivo Server

@@ -1,19 +1,50 @@
+
+// Arquivo Cliente 1
 import java.io.*;
 import java.net.*;
+import java.util.Scanner;
 
 public class Cliente1 {
-    // Declaração da variável mapa, que será usada para exibir o mapa
-    private static Mapa mapa;
 
     public static void main(String[] args) {
-        // Inicializa a variável mapa, que será usada para exibir o mapa
-        mapa = new Mapa();
-        // Exibe o mapa inicial
+        Scanner scCliente1 = new Scanner(System.in);
+        Mapa mapa = new Mapa();
+
+        System.out.println("Bem-vindo Jogador!");
+        System.out.println();
+        System.out.println("Vamos preparar o mapa para começar a jogar");
+        System.out.println();
+        System.out.println("Coloque o seu nome para começar:");
+        String nomeJogador = scCliente1.nextLine(); // Ler o nome do jogador
+        System.out.println("Seu nome: " + nomeJogador);
+        System.out.println();
+
+        // Cria um jogador com o nome informado
+        Jogador jogador = new Jogador(nomeJogador);
         mapa.displayMap();
-        // Declaração e inicialização da variável pronto, que será usada para indicar se
-        // o cliente está pronto
+        Embarcacao.displayBarcos();
+        // Chama o método SequenciaBarcos() para definir a sequência de colocação dos
+        // barcos
+        jogador.getMapa().SequenciaBarcos();
+        System.out.println("Esse é o seu mapa antes de colocar os barcos:");
+        jogador.getMapa().displayMap(); // Exibe o mapa do jogador
+        System.out.println();
+        System.out.println("Essa é a sua esquadra:");
+        System.out.println();
+
+        // Coloca os barcos no mapa antes de começar o jogo
+        jogador.getMapa().SequenciaBarcos();
+
+        // Exibe o mapa atualizado após colocar os barcos
+        System.out.println("Esse é o seu mapa após colocar os barcos:");
+        jogador.getMapa().displayMap();
+
         int pronto = 0;
         // Verifica se o cliente está pronto (neste caso, sempre será falso)
+        System.out.println("Jogador está pronto?");
+        System.out.println("Sim = 1");
+        System.out.println("Não = 0");
+        pronto = scCliente1.nextInt();
         if (pronto == 1) {
             // Endereço do servidor (localhost para o servidor na mesma máquina)
             final String servidorHost = "localhost";
@@ -38,7 +69,6 @@ public class Cliente1 {
                         // Aqui você pode adicionar lógica específica se necessário
                     }
                 }
-
                 // Aqui você pode adicionar lógica para interagir com o servidor
                 String userInputLine;
                 // Loop para ler entrada do usuário
@@ -54,5 +84,8 @@ public class Cliente1 {
                 System.err.println("Não foi possível obter E/S para a conexão com " + servidorHost);
             }
         }
+        scCliente1.close();
     }
+
 }
+// Fim Arquivo Cliente 1
