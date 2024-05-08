@@ -21,25 +21,27 @@ public class Cliente1 {
 
         // Cria um jogador com o nome informado
         Jogador jogador = new Jogador(nomeJogador);
+        System.out.println("Esse é o seu mapa antes de colocar os barcos:");
         mapa.displayMap();
-        Embarcacao.displayBarcos();
+        System.out.println("Essa é a sua esquadra:");
+        // Embarcacao.displayBarcos(); // Remover essa linha
         // Chama o método SequenciaBarcos() para definir a sequência de colocação dos
         // barcos
         jogador.getMapa().SequenciaBarcos();
-        System.out.println("Esse é o seu mapa antes de colocar os barcos:");
+
         jogador.getMapa().displayMap(); // Exibe o mapa do jogador
         System.out.println();
         System.out.println("Essa é a sua esquadra:");
         System.out.println();
-
-        // Coloca os barcos no mapa antes de começar o jogo
-        jogador.getMapa().SequenciaBarcos();
-
         // Exibe o mapa atualizado após colocar os barcos
         System.out.println("Esse é o seu mapa após colocar os barcos:");
         jogador.getMapa().displayMap();
 
+        // esconder mapa
+        jogador.getMapa().EscondeMapa();
+
         int pronto = 0;
+
         // Verifica se o cliente está pronto (neste caso, sempre será falso)
         System.out.println("Jogador está pronto?");
         System.out.println("Sim = 1");
