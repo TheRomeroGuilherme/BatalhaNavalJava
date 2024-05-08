@@ -36,21 +36,4 @@ public class Embarcacao {
         }
     }
 }
-
-/*
- * public static void displayBarcos() {
- * System.out.println("Barcos disponíveis:");
- * System.out.println("'", unidadesPortaAvioes, "' unidades de Porta-Aviões");
- * System.out.println("'", unidadesDestroyers, "' unidades de Destroyers");
- * System.out.println("'", unidadesSubmarinos, "' unidades de Submarinos");
- * System.out.println("'", unidadesFragatas, "' unidades de Fragatas");
- * System.out.println("'", unidadesBotes, "' unidades de Botes");
- * }
- * 
- * // Método para colocar um barco no mapa e atualizar a quantidade de unidades
- * // correspondente
- * 
- * displayBarcos();
- */
-
 // Fim Arquivo Embarcação

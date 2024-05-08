@@ -9,15 +9,27 @@ public class Server {
         try (ServerSocket serverSocket = new ServerSocket(12345)) { // Cria um servidor na porta 12345
             System.out.println("Servidor aguardando Jogadores darem pronto...");
 
+            //
+            // Lógica para ver se jogador 1
+            //
+
             // Aceita a conexão do Cliente1
             Socket cliente1Socket = serverSocket.accept(); // Aguarda a conexão do primeiro cliente
             System.out.println("Jogador1 conectado: " + cliente1Socket);
             // Cria um objeto para enviar mensagens para o Cliente1
             PrintWriter outCliente1 = new PrintWriter(cliente1Socket.getOutputStream(), true);
-            // Cria um objeto para receber mensagens/ do Cliente1
+            // Cria um objeto para receber mensagens do Cliente1
             BufferedReader inCliente1 = new BufferedReader(new InputStreamReader(cliente1Socket.getInputStream()));
-            // Envia uma mensagem de boas-vindas ao Cliente1
-            outCliente1.println("Bem-vindo, ");
+
+            // Lê o nome do jogador 1
+            String nomeJogador1 = inCliente1.readLine();
+
+            // Envia uma mensagem de boas-vindas ao Cliente1 com o nome do jogador 1
+            outCliente1.println("Bem-vindo, " + nomeJogador1 + "!");
+
+            //
+            // Lógica para ver se jogador 2
+            //
 
             // Aceita a conexão do Cliente2
             Socket cliente2Socket = serverSocket.accept(); // Aguarda a conexão do segundo cliente
@@ -27,8 +39,18 @@ public class Server {
             // Cria um objeto para receber mensagens do Cliente2
             BufferedReader inCliente2 = new BufferedReader(new InputStreamReader(cliente2Socket.getInputStream()));
 
+            // Lê o nome do jogador 2
+            String nomeJogador2 = inCliente2.readLine();
+
             // Envia uma mensagem de boas-vindas ao Cliente2
-            outCliente2.println("Bem-vindo, Cliente2!");
+            outCliente1.println("Bem-vindo, " + nomeJogador2 + "!");
+
+            //
+            /*
+             * Fazer lógica de comunicação entre os dois jogadores, para ver se um acertou
+             * ou não o barco
+             */
+            //
 
             // Lógica para comunicação entre os clientes
             String inputCliente1, inputCliente2;
