@@ -1,13 +1,16 @@
 
 // Arquivo Mapa
 import java.util.Scanner;
+import java.util.HashMap;
 
 public class Mapa {
     private static final int TAM = 16;
     private String[][] Tabuleiro = new String[TAM][TAM];
+    private HashMap<String, Boolean> coordenadas = new HashMap<>();
 
     public Mapa() {
         inicializeMapa();
+        SequenciaBarcos();
     }
 
     public void inicializeMapa() {
@@ -19,7 +22,7 @@ public class Mapa {
     }
 
     public void displayMap() {
-        // Exibe os números das colunas
+        // Exibe os Letras das colunas
         char rowLabel = 'A';
         System.out.print("     ");
         for (int i = 1; i <= TAM; i++) {
@@ -28,7 +31,7 @@ public class Mapa {
         }
         System.out.println();
 
-        // Exibe as letras das linhas e os elementos do tabuleiro
+        // Exibe as número das linhas e os elementos do tabuleiro
         for (int i = 0; i < TAM; i++) {
             System.out.printf(" %-3d ", i + 1);
             for (int j = 0; j < TAM; j++) {
@@ -49,15 +52,15 @@ public class Mapa {
 
     private boolean ColocarBarco(String tipoBarco, int tamanho) {
         System.out.println("Colocando " + tipoBarco + "...");
-        Scanner scanner = new Scanner(System.in);
+        Scanner scMapa = new Scanner(System.in);
 
         boolean colocado = false;
         while (!colocado) {
             System.out.print("Onde será a primeira posição do " + tipoBarco + " (Linhas de 1 até 16): ");
-            int linha = scanner.nextInt();
+            int linha = scMapa.nextInt();
 
             System.out.print("Onde será a primeira posição do " + tipoBarco + " (Colunas de A até P): ");
-            char coluna = scanner.next().toUpperCase().charAt(0);
+            char coluna = scMapa.next().toUpperCase().charAt(0);
 
             // Chama o método TemBarco para verificar se já há um barco ou borda de barco na
             // posição especificada
@@ -68,7 +71,7 @@ public class Mapa {
 
             System.out
                     .print("O " + tipoBarco + " ficará na vertical ou horizontal?\n1 = Vertical\n2 = Horizontal\n... ");
-            int orientacao = scanner.nextInt();
+            int orientacao = scMapa.nextInt();
 
             if (orientacao == 1) {
                 if (BarcoVertical(linha, coluna, tipoBarco)) {
@@ -244,6 +247,28 @@ public class Mapa {
             }
         }
         System.out.println("Mapa escondido com sucesso!");
+    }
+
+    public static void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+
+    // Método para verificar se há um barco nas coordenadas fornecidas
+    public boolean verificarAtaque(String coluna, String linha) {
+        String coordenada = coluna + linha;
+        if (coordenadas.containsKey(coordenada)) {
+            if (coordenadas.get(coordenada)) {
+                // Se houver um barco na coordenada, retorna true
+                return true;
+            } else {
+                // Se não houver um barco na coordenada, retorna false
+                return false;
+            }
+        } else {
+            // Se as coordenadas não forem válidas, retorna false
+            return false;
+        }
     }
 
 }

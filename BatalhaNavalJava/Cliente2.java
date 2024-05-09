@@ -9,13 +9,14 @@ public class Cliente2 {
     public static void main(String[] args) {
         Scanner scCliente2 = new Scanner(System.in);
         Mapa mapa = new Mapa();
-
+        Mapa.clearScreen();
         System.out.println("Bem-vindo Jogador 2!");
         System.out.println();
         System.out.println("Vamos preparar o mapa para começar a jogar");
         System.out.println();
         System.out.println("Coloque o seu nome para começar:");
         String nomeJogador = scCliente2.nextLine(); // Ler o nome do jogador
+        Mapa.clearScreen();
         System.out.println("Seu nome: " + nomeJogador);
         System.out.println();
 
@@ -24,24 +25,26 @@ public class Cliente2 {
         System.out.println("Esse é o seu mapa antes de colocar os barcos:");
         mapa.displayMap();
         System.out.println("Essa é a sua esquadra:");
+        montarEmbarcacoes();
+
         // Chama o método SequenciaBarcos() para definir a sequência de colocação dos
         // barcos
         jogador.getMapa().SequenciaBarcos();
 
-        jogador.getMapa().displayMap(); // Exibe o mapa do jogador
-        System.out.println();
-        System.out.println("Essa é a sua esquadra:");
         System.out.println();
         // Exibe o mapa atualizado após colocar os barcos
         System.out.println("Esse é o seu mapa após colocar os barcos:");
         jogador.getMapa().displayMap();
-
-        // esconder mapa
+        System.out.println("Você possui " + jogador.getTirosBarcos() + " tiros para usar.");
+        // Esconder mapa
         jogador.getMapa().EscondeMapa(); // Esconde o mapa após organizar os barcos
 
-        int pronto = 0;
+        //
+        // Lógica de ataque ao mapa do jogador 1
+        //
 
         // Verifica se o cliente está pronto (neste caso, sempre será falso)
+        int pronto = 0;
         System.out.println("Jogador está pronto?");
         System.out.println("Sim = 1");
         System.out.println("Não = 0");
@@ -60,23 +63,30 @@ public class Cliente2 {
                     BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                     // Cria um objeto para ler entrada do usuário
                     BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in))) {
+
                 String serverResponse;
+
                 // Loop para receber mensagens do servidor
                 while ((serverResponse = in.readLine()) != null) {
                     // Exibe as mensagens recebidas do servidor
                     System.out.println("Servidor: " + serverResponse);
                     // Verifica se a mensagem de boas-vindas foi recebida
-                    if (serverResponse.equals("Bem-vindo, Cliente2!")) {
+                    if (serverResponse.equals("Bem-vindo, " + nomeJogador + "!")) {
                         // Aqui você pode adicionar lógica específica se necessário
                     }
                 }
+
+                //
                 // Aqui você pode adicionar lógica para interagir com o servidor
+                //
+
                 String userInputLine;
                 // Loop para ler entrada do usuário
                 while ((userInputLine = userInput.readLine()) != null) {
                     // Envia a entrada do usuário para o servidor
                     out.println(userInputLine);
                 }
+
             } catch (UnknownHostException e) {
                 // Trata exceção se o servidor não for encontrado
                 System.err.println("Servidor não encontrado: " + servidorHost);
@@ -86,6 +96,10 @@ public class Cliente2 {
             }
         }
         scCliente2.close();
+    }
+
+    private static void montarEmbarcacoes() {
+        Embarcacao emb2 = new Embarcacao();
     }
 }
 

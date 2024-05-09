@@ -9,18 +9,19 @@ public class Cliente1 {
     public static void main(String[] args) {
         Scanner scCliente1 = new Scanner(System.in);
         Mapa mapa = new Mapa();
-
+        Mapa.clearScreen();
         System.out.println("Bem-vindo Jogador!");
         System.out.println();
         System.out.println("Vamos preparar o mapa para começar a jogar");
         System.out.println();
         System.out.println("Coloque o seu nome para começar:");
         String nomeJogador = scCliente1.nextLine(); // Ler o nome do jogador
+        Mapa.clearScreen();
         System.out.println("Seu nome: " + nomeJogador);
         System.out.println();
 
         // Cria um jogador com o nome informado
-        Jogador jogador = new Jogador(nomeJogador);
+        Jogador jogador1 = new Jogador(nomeJogador);
         System.out.println("Esse é o seu mapa antes de colocar os barcos:");
         mapa.displayMap();
         System.out.println("Essa é a sua esquadra:");
@@ -28,15 +29,15 @@ public class Cliente1 {
 
         // Chama o método SequenciaBarcos() para definir a sequência de colocação dos
         // barcos
-        jogador.getMapa().SequenciaBarcos();
+        jogador1.getMapa().SequenciaBarcos();
 
         System.out.println();
         // Exibe o mapa atualizado após colocar os barcos
         System.out.println("Esse é o seu mapa após colocar os barcos:");
-        jogador.getMapa().displayMap();
-
+        jogador1.getMapa().displayMap();
+        System.out.println("Você possui " + jogador1.getTirosBarcos() + " tiros para usar.");
         // esconder mapa de jogador 1
-        jogador.getMapa().EscondeMapa();
+        jogador1.getMapa().EscondeMapa();
 
         //
         // lógica de atacar o mapa do jogador2
@@ -63,9 +64,6 @@ public class Cliente1 {
                     // Cria um objeto para ler entrada do usuário
                     BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in))) {
 
-                //
-                //
-                //
                 String serverResponse;
 
                 // Loop para receber mensagens do servidor
@@ -89,9 +87,6 @@ public class Cliente1 {
                     out.println(userInputLine);
                 }
 
-                //
-                //
-                //
             } catch (UnknownHostException e) {
                 // Trata exceção se o servidor não for encontrado
                 System.err.println("Servidor não encontrado: " + servidorHost);
@@ -104,7 +99,7 @@ public class Cliente1 {
     }
 
     private static void montarEmbarcacoes() {
-        Embarcacao emb = new Embarcacao();
+        Embarcacao emb1 = new Embarcacao();
     }
 }
 
